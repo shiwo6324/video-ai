@@ -5,6 +5,7 @@ import {
 } from "@/components/ui/collapsible"
 import { useExtionContext } from "context/extension-context"
 import React from "react"
+import { getVideoData } from "utils/functions"
 
 const Extension = () => {
   const {
@@ -23,6 +24,28 @@ const Extension = () => {
     extensionTheme,
     extensionVideoId
   } = useExtionContext()
+
+  React.useEffect(() => {
+    const getVideoId = () => {
+      const videoId = new URLSearchParams(window.location.search).get("v")
+      return videoId
+    }
+
+    const fetchVideoData = async () => {
+      const id = getVideoId()
+      if (id && id !== extensionVideoId) {
+        setExtensionVideoId(id)
+        setExtensionLoading(true)
+        const data = await getVideoData(id)
+        setExtensionData(data)
+        setExtensionLoading(false)
+      }
+    }
+    fetchVideoData()
+
+    const intervalId = setInterval(fetchVideoData, 2000)
+    return () => clearInterval(intervalId)
+  }, [extensionVideoId])
 
   React.useEffect(() => {
     // 获取网页背景颜色
