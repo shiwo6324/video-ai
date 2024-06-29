@@ -8,6 +8,8 @@ import { cn } from "lib/utils"
 import React from "react"
 import { getVideoData } from "utils/functions"
 
+import ExtensionActions from "./extension-actions"
+
 const Extension = () => {
   const {
     setExtensionContainer,
@@ -74,12 +76,7 @@ const Extension = () => {
           className="space-y-3"
           open={extensionIsOpen}
           onOpenChange={setExtensionIsOpen}>
-          <h1>Extension Actions</h1>
-          <CollapsibleTrigger>Can I use this in my project?</CollapsibleTrigger>
-          <CollapsibleContent>
-            Yes. Free to use for personal and commercial projects. No
-            attribution required.
-          </CollapsibleContent>
+          <ExtensionActions />
         </Collapsible>
       </div>
     </main>
