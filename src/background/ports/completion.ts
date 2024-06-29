@@ -33,7 +33,9 @@ export async function createCompletion(
   })
 }
 
+// 处理来自浏览器扩展的请求
 const handler: PlasmoMessaging.PortHandler = async (req, res) => {
+  // 累积从模型生成的响应数据
   let cumulativeData = ""
 
   const prompt = req.body.prompt
@@ -43,6 +45,7 @@ const handler: PlasmoMessaging.PortHandler = async (req, res) => {
   try {
     const completion = await createCompletion(model, prompt, context)
 
+    // 监听生成内容事件 content，每当有新的内容生成时，将其累加到 cumulativeData 并发送部分响应
     completion.on("content", (delta, snapshot) => {
       cumulativeData += delta
       res.send({ message: cumulativeData, error: "", isEnd: false })
