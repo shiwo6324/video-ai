@@ -9,6 +9,7 @@ import React from "react"
 import { getVideoData } from "utils/functions"
 
 import ExtensionActions from "./extension-actions"
+import ExtensionPanels from "./extension-panels"
 
 const Extension = () => {
   const {
@@ -77,6 +78,12 @@ const Extension = () => {
           open={extensionIsOpen}
           onOpenChange={setExtensionIsOpen}>
           <ExtensionActions />
+
+          <CollapsibleContent
+            className=" h-fit max-h-[500px]
+           border border-zinc-200 rounded-md overflow-auto ">
+            <ExtensionPanels />
+          </CollapsibleContent>
         </Collapsible>
       </div>
     </main>
