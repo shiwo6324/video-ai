@@ -2,8 +2,9 @@ import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger
-} from "@/components/ui/collapsible"
+} from "components/ui/collapsible"
 import { useExtionContext } from "context/extension-context"
+import { cn } from "lib/utils"
 import React from "react"
 import { getVideoData } from "utils/functions"
 
@@ -65,9 +66,14 @@ const Extension = () => {
 
   if (!extensionTheme) return null
   return (
-    <div className={`antialiased w-full mb-3 z-10`}>
+    <main
+      ref={extensionContainer}
+      className={cn("antialiased w-full mb-3 z-10", extensionTheme)}>
       <div className="w-full">
-        <Collapsible className="space-y-3">
+        <Collapsible
+          className="space-y-3"
+          open={extensionIsOpen}
+          onOpenChange={setExtensionIsOpen}>
           <h1>Extension Actions</h1>
           <CollapsibleTrigger>Can I use this in my project?</CollapsibleTrigger>
           <CollapsibleContent>
@@ -76,7 +82,7 @@ const Extension = () => {
           </CollapsibleContent>
         </Collapsible>
       </div>
-    </div>
+    </main>
   )
 }
 

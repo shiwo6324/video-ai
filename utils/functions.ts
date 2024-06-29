@@ -9,6 +9,8 @@ function compareTracks(track1, track2) {
   const langCode1 = track1.languageCode
   const langCode2 = track2.languageCode
 
+  // 如果有多个字幕轨道，优先选择英语字幕
+  // 优先选择非自动语音识别 (ASR) 的字幕
   if (langCode1 === "en" && langCode2 !== "en") {
     return -1 // 如果第一个轨道是英语，而第二个不是，英语轨道排在前
   } else if (langCode1 !== "en" && langCode2 === "en") {
