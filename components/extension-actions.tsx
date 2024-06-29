@@ -2,15 +2,27 @@ import {
   ActivityLogIcon,
   CardStackPlusIcon,
   ChatBubbleIcon,
+  CheckIcon,
+  Link2Icon,
   Pencil1Icon
 } from "@radix-ui/react-icons"
 import { Button } from "components/ui/button"
 import { useExtionContext } from "context/extension-context"
+import { useCopyToClipboard } from "hooks/use-copy-clipboard"
 import React from "react"
+
+import TooltipWrapper from "./tooltip-wrapper"
 
 const ExtensionActions = () => {
   const { setExtensionPanel, extensionIsOpen, setExtensionIsOpen } =
     useExtionContext()
+
+  const { isCopied, copyToClipboard } = useCopyToClipboard({})
+
+  const copyVideoURL = () => {
+    if (isCopied) return
+    copyToClipboard(window.location.href)
+  }
   return (
     <div
       className="border border-zinc-200 rounded-md flex
@@ -51,6 +63,18 @@ const ExtensionActions = () => {
             <span className="opacity-90">聊天</span>
           </Button>
         </div>
+      </div>
+
+      <div className="flex items-center space-x-2">
+        <TooltipWrapper text="复制当前视频链接地址">
+          <Button variant="outline" size="icon" onClick={copyVideoURL}>
+            {isCopied ? (
+              <CheckIcon className="w-4 h-4 opacity-60" />
+            ) : (
+              <Link2Icon className="w-4 h-4 opacity-60" />
+            )}
+          </Button>
+        </TooltipWrapper>
       </div>
     </div>
   )
