@@ -1,6 +1,7 @@
 import {
   ActivityLogIcon,
   CardStackPlusIcon,
+  CaretSortIcon,
   ChatBubbleIcon,
   CheckIcon,
   Link2Icon,
@@ -12,6 +13,7 @@ import { useCopyToClipboard } from "hooks/use-copy-clipboard"
 import React from "react"
 
 import TooltipWrapper from "./tooltip-wrapper"
+import { CollapsibleTrigger } from "./ui/collapsible"
 
 const ExtensionActions = () => {
   const { setExtensionPanel, extensionIsOpen, setExtensionIsOpen } =
@@ -19,9 +21,9 @@ const ExtensionActions = () => {
 
   const { isCopied, copyToClipboard } = useCopyToClipboard({})
 
-  const copyVideoURL = () => {
+  const copyVideoURL = async () => {
     if (isCopied) return
-    copyToClipboard(window.location.href)
+    await copyToClipboard(window.location.href)
   }
   return (
     <div
@@ -29,8 +31,9 @@ const ExtensionActions = () => {
      items-center justify-between py-2.5 px-3
       dark:bg-[#0f0f0f] dark:text-white dark:border-zinc-800">
       <CardStackPlusIcon className="w-6 h-6 opacity-50 ml-2" />
-      <div className="flex justify-center items-center space-x-2">
-        <div className="flex -space-x-px">
+
+      <div className="flex justify-center items-center  flex-1 ">
+        <div className="flex ">
           <Button
             onClick={() => {
               setExtensionPanel("总结")
@@ -75,6 +78,12 @@ const ExtensionActions = () => {
             )}
           </Button>
         </TooltipWrapper>
+
+        <CollapsibleTrigger asChild>
+          <Button variant="outline" size="icon">
+            <CaretSortIcon className="w-4 h-4 opacity-60" />
+          </Button>
+        </CollapsibleTrigger>
       </div>
     </div>
   )
