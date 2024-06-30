@@ -1,6 +1,9 @@
 import React from "react"
 
+import { usePort } from "@plasmohq/messaging/hook"
+
 import { models, prompts, type Model, type Prompt } from "../constants"
+import { useExtionContext } from "./extension-context"
 
 interface SummaryContext {
   summaryModel: Model
@@ -22,7 +25,7 @@ const SummaryContext = React.createContext<SummaryContext | undefined>(
 
 export function SummaryProvider({ children }: { children: React.ReactNode }) {
   const { Provider } = SummaryContext
-
+  const { extensionData, extensionLoading } = useExtionContext()
   const [summaryModel, setSummaryModel] = React.useState<Model>(models[0])
   const [summaryPrompt, setSummaryPrompt] = React.useState<Prompt>(prompts[0])
   const [summaryContent, setSummaryContent] = React.useState<string | null>(
@@ -31,7 +34,30 @@ export function SummaryProvider({ children }: { children: React.ReactNode }) {
   const [summaryIsError, setSummaryIsError] = React.useState<boolean>(false)
   const [summaryIsGenerating, setSummaryIsGenerating] =
     React.useState<boolean>(false)
-  const generateSummary = async (e: any) => {}
+
+  const port = usePort("completion")
+
+  async function generateSummary(e: any) {
+    e.preventDefault()
+
+    if (summaryContent !== null) {
+      setSummaryContent(null)
+    }
+    setSummaryIsGenerating(true)
+    setSummaryIsError(false)
+    port.send({
+      prompt: summaryPrompt.content,
+      model: setSummaryModel,
+      context: extensionData
+    })
+  }
+
+  React.useEffect(() => {
+    setSummaryContent(null)
+    setSummaryIsGenerating(false)
+    setSummaryIsError(false)
+  }, [extensionLoading])
+
   const value = {
     summaryModel,
     setSummaryContent,
@@ -45,7 +71,6 @@ export function SummaryProvider({ children }: { children: React.ReactNode }) {
     setSummaryIsGenerating,
     generateSummary
   }
-
   return <Provider value={value}>{children}</Provider>
 }
 

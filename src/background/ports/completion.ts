@@ -1,4 +1,3 @@
-import { error } from "console"
 import { OpenAI } from "openai"
 
 import type { PlasmoMessaging } from "@plasmohq/messaging"
