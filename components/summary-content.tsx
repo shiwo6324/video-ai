@@ -1,6 +1,7 @@
 import { useSummary } from "context/summary-context"
 import React from "react"
 
+import Md from "./md"
 import SummarySkeleton from "./summary-skeleton"
 import { Button } from "./ui/button"
 
@@ -25,7 +26,9 @@ const SummaryContent = () => {
   }
   return (
     <div className="">
-      <div>{summaryContent}</div>
+      <div>
+        <Md markdown={summaryContent} className="pb-6" />
+      </div>
     </div>
   )
 }

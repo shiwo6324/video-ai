@@ -58,8 +58,6 @@ export function SummaryProvider({ children }: { children: React.ReactNode }) {
   }, [extensionLoading])
 
   React.useEffect(() => {
-    console.log("data", port.data)
-
     if (port.data?.message !== undefined && port.data?.isEnd === false) {
       setSummaryContent(port.data?.message)
     } else {
