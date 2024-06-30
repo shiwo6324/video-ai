@@ -3,7 +3,7 @@ import { useSummary } from "context/summary-context"
 import { useCopyToClipboard } from "hooks/use-copy-clipboard"
 import React from "react"
 
-import { models, type Model } from "../constants"
+import { models, prompts, type Model, type Prompt } from "../constants"
 import TooltipWrapper from "./tooltip-wrapper"
 import { Button } from "./ui/button"
 import {
@@ -81,6 +81,23 @@ const SummaryActions = () => {
             )}
           </Button>
         </TooltipWrapper>
+
+        <Select
+          value={summaryPrompt.value}
+          onValueChange={(value) =>
+            setSummaryPrompt(prompts.find((prompt) => prompt.value === value))
+          }>
+          <SelectTrigger className="space-x-2 ">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            {prompts.map((prompt: Prompt) => (
+              <SelectItem key={prompt.value} value={prompt.value}>
+                {prompt.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
     </div>
   )
