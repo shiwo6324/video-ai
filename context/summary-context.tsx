@@ -24,6 +24,7 @@ const SummaryContext = React.createContext<SummaryContext | undefined>(
 )
 
 export function SummaryProvider({ children }: { children: React.ReactNode }) {
+  const port = usePort("completion")
   const { Provider } = SummaryContext
   const { extensionData, extensionLoading } = useExtionContext()
   const [summaryModel, setSummaryModel] = React.useState<Model>(models[0])
@@ -35,16 +36,14 @@ export function SummaryProvider({ children }: { children: React.ReactNode }) {
   const [summaryIsGenerating, setSummaryIsGenerating] =
     React.useState<boolean>(false)
 
-  const port = usePort("completion")
-
   async function generateSummary(e: any) {
     e.preventDefault()
-
     if (summaryContent !== null) {
       setSummaryContent(null)
     }
     setSummaryIsGenerating(true)
     setSummaryIsError(false)
+
     port.send({
       prompt: summaryPrompt.content,
       model: setSummaryModel,
@@ -58,6 +57,16 @@ export function SummaryProvider({ children }: { children: React.ReactNode }) {
     setSummaryIsError(false)
   }, [extensionLoading])
 
+  React.useEffect(() => {
+    console.log("data", port.data)
+
+    if (port.data?.message !== undefined && port.data?.isEnd === false) {
+      setSummaryContent(port.data?.message)
+    } else {
+      setSummaryIsGenerating(false)
+    }
+    setSummaryIsError(false)
+  }, [port.data?.message])
   const value = {
     summaryModel,
     setSummaryContent,

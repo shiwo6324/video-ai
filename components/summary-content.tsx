@@ -1,0 +1,33 @@
+import { useSummary } from "context/summary-context"
+import React from "react"
+
+import SummarySkeleton from "./summary-skeleton"
+import { Button } from "./ui/button"
+
+const SummaryContent = () => {
+  const { summaryIsGenerating, summaryContent, generateSummary } = useSummary()
+  if (!summaryContent && summaryIsGenerating) {
+    return (
+      <div>
+        <SummarySkeleton />
+      </div>
+    )
+  }
+
+  if (!summaryContent && !summaryIsGenerating) {
+    return (
+      <div>
+        <Button onClick={generateSummary}>
+          <span>生成总结</span>
+        </Button>
+      </div>
+    )
+  }
+  return (
+    <div className="">
+      <div>{summaryContent}</div>
+    </div>
+  )
+}
+
+export default SummaryContent
