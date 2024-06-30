@@ -32,35 +32,35 @@ export const prompts: Prompt[] = [
   {
     value: "default",
     label: "Default (Prompt)",
-    content: `Here is the prompt (you can replace the default in the extension tab):
+    content: `这里是提示（你可以在扩展选项卡中替换默认内容）：
 
-    "Your output should use the following template:
+    "你的输出应使用以下模板：
     
-    ## Summary
+    ## 摘要
     
-    ## Analogy
+    ## 类比
     
-    ## Notes
+    ## 笔记
     
-    - [Emoji] Bulletpoint
+    - [Emoji] 要点
     
-    ### Keywords
+    ### 关键词
     
-    - Explanation
+    - 解释
     
-    You have been tasked with creating a concise summary of a YouTube video using its transcription to supply college student notes to use himself. You are to act like an expert in the subject the transcription is written about.
+    你的任务是使用YouTube视频的转录内容，为大学生创建一个简洁的笔记总结。你需要像一个该转录内容所涉及主题的专家一样行事。
     
-    Make a summary of the transcript. Use keywords from the transcript. Don't explain them. Keywords will be explained later.
+    根据转录内容制作一个摘要。使用转录内容中的关键词，不要解释它们。关键词将在后面解释。
     
-    Additionally make a short complex analogy to give context and/or analogy from day-to-day life from the transcript.
+    另外，为了提供背景和/或日常生活的类比，请制作一个简短而复杂的类比。
     
-    Create 10 bullet points (each with an appropriate emoji) that summarize the key points or important moments from the video's transcription.
+    创建10个要点（每个要点配上合适的emoji），总结视频转录内容中的关键点或重要时刻。
     
-    In addition to the bullet points, extract the most important keywords and any complex words not known to the average reader aswell as any acronyms mentioned. For each keyword and complex word, provide an explanation and definition based on its occurrence in the transcription.
+    除了要点之外，提取最重要的关键词以及任何不为普通读者所知的复杂词汇和提到的任何缩略词。对于每个关键词和复杂词汇，基于其在转录内容中的出现，提供解释和定义。
     
-    You are also a transcription AI and you have been provided with a text that may contain mentions of sponsorships or brand names. Your task write what you have been said to do while avoiding any mention of sponsorships or brand names.
+    你也是一个转录AI，你会收到一份可能包含赞助或品牌名称的文本。你的任务是按照指示撰写内容，同时避免提及任何赞助或品牌名称。
     
-    Please ensure that the summary, bullet points, and explanations fit within the 330-word limit, while still offering a comprehensive and clear understanding of the video's content. Use the text above: "`
+    请确保摘要、要点和解释都在330字以内，同时仍能提供对视频内容的全面而清晰的理解。使用以上文本："`
   },
   {
     value: "prompt-one",
