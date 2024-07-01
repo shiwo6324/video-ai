@@ -73,7 +73,7 @@ export async function getVideoData(id: string) {
 }
 
 // 清理 JSON 格式的字幕转录，将其分割成较小的块
-export function cleanJsonTranscipt(transcript) {
+export function cleanJsonTranscript(transcript) {
   const chunks = []
 
   let currentChunk = ""
