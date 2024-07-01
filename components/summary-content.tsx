@@ -9,7 +9,7 @@ const SummaryContent = () => {
   const { summaryIsGenerating, summaryContent, generateSummary } = useSummary()
   if (!summaryContent && summaryIsGenerating) {
     return (
-      <div>
+      <div className="flex justify-center items-center w-full p-3 bg-white dark:bg-[#0f0f0f]">
         <SummarySkeleton />
       </div>
     )
@@ -17,9 +17,12 @@ const SummaryContent = () => {
 
   if (!summaryContent && !summaryIsGenerating) {
     return (
-      <div>
-        <Button onClick={generateSummary}>
-          <span>生成总结</span>
+      <div className="flex justify-center items-center w-full p-3 bg-white dark:bg-[#0f0f0f] ">
+        <Button
+          variant="outline"
+          className="w-full h-12"
+          onClick={generateSummary}>
+          <span className="text-sm">生成总结</span>
         </Button>
       </div>
     )
