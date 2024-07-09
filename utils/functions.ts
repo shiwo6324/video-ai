@@ -72,7 +72,7 @@ export async function getVideoData(id: string) {
   return { metadata, transcript: null } // 如果没有字幕轨道，则返回元数据和 null 的转录信息
 }
 
-// 清理 JSON 格式的字幕转录，将其分割成较小的块
+// 返回一个包含文本块及其时间信息的数组。
 export function cleanJsonTranscript(transcript) {
   const chunks = []
 
@@ -111,7 +111,7 @@ export function cleanJsonTranscript(transcript) {
   return chunks
 }
 
-// 清理文本格式的字幕转录，将其分割成较小的块并添加时间戳
+// 返回一个带有时间戳的字符串
 export function cleanTextTranscript(transcript) {
   let textLines = []
   let tempText = ""
